@@ -231,6 +231,7 @@
       ?+  mark  (on-poke:def mark vase)
           %metadata-action
         (poke-metadata-action:mc !<(metadata-action vase))
+      ::
           %noun
         =/  val=(each [%cleanup path] tang)
           (mule |.(!<([%cleanup path] vase)))
@@ -249,6 +250,10 @@
           [app-name.r group app-path.r]
         ==
         out
+      ::
+          %import
+        ?>  ?=(@ q.vase)
+        (poke-import:mc q.vase)
       ==
     [cards this]
   ::
@@ -303,6 +308,9 @@
       =/  app=term        i.t.t.path
       =/  app-path=^path  t.t.t.path
       ``noun+!>((~(get by resource-indices) app app-path))
+    ::
+        [%x %export ~]
+      ``noun+!>((jam state))
     ==
   ::
   ++  on-leave  on-leave:def
@@ -320,6 +328,12 @@
       %add     (handle-add group-path.act resource.act metadata.act)
       %remove  (handle-remove group-path.act resource.act)
   ==
+::
+++  poke-import
+  |=  jammed=@
+  ^-  (quip card _state)
+  =/  sty=state-4  ;;(state-4 (cue jammed))
+  [~ sty]
 ::
 ++  handle-add
   |=  [=group-path =md-resource =metadata]
